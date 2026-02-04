@@ -1,44 +1,86 @@
 [
   {
-    "id": "1",
-    "titulo": "Paper Minecraft",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Minecraft",
-    "url": "https://scratch.mit.edu/projects/10128407/embed",
-    "categoria": "Survival"
+    "id": "subway-surfers",
+    "titulo": "Subway Surfers",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Subway+Surfers",
+    "url": "https://sz-games.github.io/subway-surfers/",
+    "categoria": "Ação"
   },
   {
-    "id": "2",
-    "titulo": "Appel (Mario Style)",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Appel",
-    "url": "https://scratch.mit.edu/projects/60917032/embed",
-    "categoria": "Aventura"
+    "id": "drift-hunters",
+    "titulo": "Drift Hunters (3D)",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Drift+Hunters",
+    "url": "https://webglmath.github.io/drift-hunters/",
+    "categoria": "Corridas"
   },
   {
-    "id": "3",
+    "id": "1v1-lol",
+    "titulo": "1v1.LOL",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=1v1.LOL",
+    "url": "https://play-1v1-lol.github.io/",
+    "categoria": "FPS"
+  },
+  {
+    "id": "moto-x3m",
+    "titulo": "Moto X3M",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Moto+X3M",
+    "url": "https://moto-x3m.github.io/",
+    "categoria": "Corridas"
+  },
+  {
+    "id": "retro-bowl",
+    "titulo": "Retro Bowl",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Retro+Bowl",
+    "url": "https://retrobowl-unblocked.github.io/",
+    "categoria": "Desporto"
+  },
+  {
+    "id": "slope",
     "titulo": "Slope",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Slope",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Slope",
     "url": "https://cgolden15.github.io/Slope-Game/",
     "categoria": "Arcade"
   },
   {
-    "id": "4",
-    "titulo": "1v1.LOL",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=1v1.LOL",
-    "url": "https://play-1v1-lol.github.io/",
+    "id": "cluster-rush",
+    "titulo": "Cluster Rush",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Cluster+Rush",
+    "url": "https://webglmath.github.io/cluster-rush/",
     "categoria": "Ação"
   },
   {
-    "id": "5",
+    "id": "basket-random",
     "titulo": "Basket Random",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Basket+Random",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Basket+Random",
     "url": "https://basketrandompro.github.io/",
     "categoria": "Desporto"
   },
   {
-    "id": "6",
-    "titulo": "2048",
-    "thumb": "https://placehold.co/600x400/050505/00ff00?text=2048",
+    "id": "bloxd",
+    "titulo": "Bloxd.io (Minecraft)",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Minecraft+Bloxd",
+    "url": "https://bloxd.io/",
+    "categoria": "Survival"
+  },
+  {
+    "id": "2048",
+    "titulo": "2048 Classic",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=2048",
     "url": "https://play2048.co/",
+    "categoria": "Puzzle"
+  },
+  {
+    "id": "cookie-clicker",
+    "titulo": "Cookie Clicker",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Cookie+Clicker",
+    "url": "https://orteil.dashnet.org/cookieclicker/",
+    "categoria": "Casual"
+  },
+  {
+    "id": "hextris",
+    "titulo": "Hextris",
+    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Hextris",
+    "url": "https://hextris.io/",
     "categoria": "Puzzle"
   }
 ]
