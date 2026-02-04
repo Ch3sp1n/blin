@@ -11,41 +11,32 @@ const categorias = [...new Set(listaDeJogos.map((jogo) => jogo.categoria))];
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width" />
-    <title>Gamer Portal</title>
-
-    <script is:inline>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-PQHFF59B');
-    </script>
+    <title>Gamer Portal | Retro Arcade</title>
   </head>
-  
   <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQHFF59B"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     <div class="retro-bg"><div class="grid"></div></div>
 
     <header>
-      <a href="/" class="logo-link">
-        <div class="logo-text">GAMER <span class="highlight">PORTAL</span></div>
-      </a>
-
-      <PerfilJogador />
-      
-      <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Pesquisar jogos..." />
+      <div class="header-top">
+        <a href="/" class="logo-link">
+          <div class="logo-text">GAMER <span class="highlight">PORTAL</span></div>
+        </a>
+        <PerfilJogador />
       </div>
 
-      <div class="filters">
-        <button class="filter-btn active" data-cat="todos">Todos</button>
-        <button class="filter-btn fav-filter" data-cat="favoritos">❤️ Favoritos</button>
+      <div class="controls-wrapper">
+        <div class="search-container">
+          <input type="text" id="searchBox" placeholder="Pesquisar na biblioteca..." />
+        </div>
 
-        {categorias.map((cat) => (
-          <button class="filter-btn" data-cat={cat}>{cat}</button>
-        ))}
+        <div class="filters">
+          <button class="filter-btn active" data-cat="todos">Todos</button>
+          <button class="filter-btn fav-filter" data-cat="favoritos">❤️ Favoritos</button>
+          {categorias.map((cat) => (
+            <button class="filter-btn" data-cat={cat}>{cat}</button>
+          ))}
+        </div>
       </div>
     </header>
 
@@ -60,50 +51,35 @@ const categorias = [...new Set(listaDeJogos.map((jogo) => jogo.categoria))];
           <GameCard 
             id={jogo.id}
             titulo={jogo.titulo} 
-            thumb={jogo.imagem} 
+            thumb={jogo.imagem || "/capas/placeholder.jpg"} 
             categoria={jogo.categoria} 
           />
         </div>
       ))}
     </main>
     
-    <p id="no-results" style="display: none; text-align: center; color: #aaa; margin-top: 20px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;">
-      Nenhum jogo encontrado... 😢
-    </p>
+    <p id="no-results">Nenhum jogo encontrado... 😢</p>
 
     <script is:inline>
-      // Selecionamos os elementos aqui dentro para garantir que o script os "vê"
       const searchBox = document.getElementById('searchBox');
       const filterBtns = document.querySelectorAll('.filter-btn');
       const games = document.querySelectorAll('.game-wrapper');
       const noResults = document.getElementById('no-results');
       
-      // Criamos uma função de segurança para o localStorage
-      const getFavoritos = () => {
-        try {
-          return JSON.parse(localStorage.getItem('meusJogosFavoritos')) || [];
-        } catch (e) {
-          return [];
-        }
-      };
-
-      let favoritos = getFavoritos();
-      let categoriaAtual = 'todos';
+      let favoritos = JSON.parse(localStorage.getItem('meusJogosFavoritos')) || [];
 
       function atualizarCoracoes() {
         document.querySelectorAll('.heart-btn').forEach(btn => {
           const id = btn.getAttribute('data-id');
-          if (favoritos.includes(id)) {
-            btn.classList.add('liked');
-          } else {
-            btn.classList.remove('liked');
-          }
+          if (favoritos.includes(id)) btn.classList.add('liked');
+          else btn.classList.remove('liked');
         });
       }
 
       function filtrar() {
         const termo = searchBox.value.toLowerCase();
         let visiveis = 0;
+        const catAtual = document.querySelector('.filter-btn.active').getAttribute('data-cat');
 
         games.forEach((game) => {
           const titulo = game.getAttribute('data-titulo');
@@ -111,13 +87,7 @@ const categorias = [...new Set(listaDeJogos.map((jogo) => jogo.categoria))];
           const idJogo = game.getAttribute('data-id');
 
           const matchTexto = titulo.includes(termo);
-          let matchCat = false;
-
-          if (categoriaAtual === 'favoritos') {
-            matchCat = favoritos.includes(idJogo);
-          } else {
-            matchCat = categoriaAtual === 'todos' || catJogo === categoriaAtual;
-          }
+          const matchCat = catAtual === 'todos' || (catAtual === 'favoritos' ? favoritos.includes(idJogo) : catJogo === catAtual);
 
           if (matchTexto && matchCat) {
             game.style.display = 'block';
@@ -127,54 +97,76 @@ const categorias = [...new Set(listaDeJogos.map((jogo) => jogo.categoria))];
           }
         });
 
-        if (noResults) {
-            noResults.style.display = visiveis > 0 ? 'none' : 'block';
-            noResults.textContent = (visiveis === 0 && categoriaAtual === 'favoritos') 
-                ? "Ainda não tens favoritos! Clica nos ❤️" 
-                : "Nenhum jogo encontrado... 😢";
-        }
+        noResults.style.display = visiveis > 0 ? 'none' : 'block';
       }
 
-      // Event Listeners para Corações
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('.heart-btn')) {
-          const btn = e.target.closest('.heart-btn');
-          const id = btn.getAttribute('data-id');
-          
-          if (favoritos.includes(id)) {
-            favoritos = favoritos.filter(favId => favId !== id);
-          } else {
-            favoritos.push(id);
-          }
-          localStorage.setItem('meusJogosFavoritos', JSON.stringify(favoritos));
-          atualizarCoracoes();
-          if (categoriaAtual === 'favoritos') filtrar();
-        }
-      });
-
-      // Inicialização segura
-      if (searchBox) searchBox.addEventListener('input', filtrar);
-      
-      filterBtns.forEach((btn) => {
+      // Event Listeners
+      searchBox.addEventListener('input', filtrar);
+      filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          categoriaAtual = btn.getAttribute('data-cat');
           filtrar();
         });
       });
 
+      // Clique nos corações (Event Delegation)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.heart-btn');
+        if (btn) {
+          const id = btn.getAttribute('data-id');
+          if (favoritos.includes(id)) favoritos = favoritos.filter(f => f !== id);
+          else favoritos.push(id);
+          localStorage.setItem('meusJogosFavoritos', JSON.stringify(favoritos));
+          atualizarCoracoes();
+          filtrar();
+        }
+      });
+
       atualizarCoracoes();
     </script>
-
-    <style>
-      /* Teu estilo CSS mantém-se igual */
-      body { background-color: #050505; color: white; margin: 0; font-family: sans-serif; }
-      .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
-      .retro-bg { position: fixed; z-index: -1; width: 100%; height: 100%; }
-      .highlight { color: #ff0055; }
-      .filter-btn.active { background: #ff0055; color: white; }
-      .liked { color: #ff0055 !important; }
-    </style>
   </body>
 </html>
+
+<style>
+  /* DE VOLTA AO VISUAL BONITO */
+  body { background-color: #050505; color: white; margin: 0; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+  .retro-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; perspective: 1000px; }
+  .grid {
+    position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+    background-image: linear-gradient(rgba(255, 0, 85, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 85, 0.2) 1px, transparent 1px);
+    background-size: 50px 50px; transform: rotateX(60deg); animation: move 20s linear infinite;
+  }
+  @keyframes move { from { background-position: 0 0; } to { background-position: 0 50px; } }
+
+  header { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .header-top { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+
+  .logo-text { font-size: 3rem; font-weight: 900; font-style: italic; letter-spacing: -2px; text-shadow: 0 0 20px rgba(255, 0, 85, 0.5); }
+  .highlight { color: #ff0055; }
+
+  .search-container input {
+    background: rgba(20, 20, 20, 0.8); border: 2px solid #333; color: white;
+    padding: 15px 30px; border-radius: 50px; width: 400px; outline: none; transition: 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .search-container input:focus { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
+
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .filter-btn {
+    background: #1a1a1a; border: 1px solid #333; color: #888; padding: 8px 20px;
+    border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: 600;
+  }
+  .filter-btn.active { background: #ff0055; color: white; border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.4); }
+
+  .game-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto;
+  }
+
+  #no-results { text-align: center; color: #666; display: none; margin-top: 50px; font-size: 1.2rem; }
+
+  /* Coração rosa néon */
+  :global(.liked) { color: #ff0055 !important; filter: drop-shadow(0 0 5px #ff0055); }
+</style>
