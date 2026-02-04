@@ -1,5 +1,5 @@
 [
-  { "id": "adventure capitalist", "titulo": "adventure capitalist", "url": "/games/cladventurecapitalist.html", "categoria": "Simulação" , "imagem":"adventurecapitalist.jpg"},
+  { "id": "adventure capitalist", "titulo": "adventure capitalist", "url": "/games/cladventurecapitalist.html", "categoria": "Simulação" , "imagem":"/capas/adventurecapitalist.jpg"},
 
   { "id": "slope", "titulo": "Slope", "url": "/games/slope.html", "categoria": "Ação" , "imagem":"" },
 
