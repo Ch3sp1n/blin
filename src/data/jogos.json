@@ -1,11 +1,11 @@
 [
-  { "id": "moto-x3m", "titulo": "Moto X3M", "url": "/games/moto-x3m.html", "categoria": "Corridas" },
+  { "id": "adventure capitalist", "titulo": "adventure capitalist", "url": "/games/cladventurecapitalist.html", "categoria": "Simulação" },
 
   { "id": "slope", "titulo": "Slope", "url": "/games/slope.html", "categoria": "Ação" },
 
   { "id": "run-3", "titulo": "Run 3", "url": "/games/run-3.html", "categoria": "Plataforma" },
 
-  { "id": "fireboy-watergirl-1", "titulo": "Fireboy & Watergirl 1", "url": "/games/fbwg1.html", "categoria": "Aventura" },
+  { "id": "fireboy-watergirl-1", "titulo": "Fireboy & Watergirl 1", "url": "/games/clfireboyandwatergirl.html", "categoria": "Aventura" },
 
   { "id": "tunnel-rush", "titulo": "Tunnel Rush", "url": "/games/tunnel-rush.html", "categoria": "Ação" },
 
@@ -44,6 +44,6 @@
   { "id": "ovo", "titulo": "OvO", "url": "/games/ovo.html", "categoria": "Parkour" },
 
   { "id": "soccer-skills", "titulo": "Soccer Skills", "url": "/games/soccer-skills.html", "categoria": "Desporto" },
-  
+
   { "id": "smash-karts", "titulo": "Smash Karts", "url": "/games/smash-karts.html", "categoria": "Multijogador" }
 ]
