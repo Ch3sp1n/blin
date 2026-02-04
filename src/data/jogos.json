@@ -1,86 +1,86 @@
 [
   {
-    "id": "subway-surfers",
-    "titulo": "Subway Surfers",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Subway+Surfers",
-    "url": "https://sz-games.github.io/subway-surfers/",
-    "categoria": "Ação"
+    "id": "slow-roads",
+    "titulo": "Slow Roads",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Slow+Roads",
+    "url": "https://slowroads.io/",
+    "categoria": "Relaxante"
   },
   {
-    "id": "drift-hunters",
-    "titulo": "Drift Hunters (3D)",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Drift+Hunters",
-    "url": "https://webglmath.github.io/drift-hunters/",
-    "categoria": "Corridas"
+    "id": "celeste-classic",
+    "titulo": "Celeste Classic",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Celeste",
+    "url": "https://exok.com/games/celeste/pico-8/",
+    "categoria": "Aventura"
   },
   {
-    "id": "1v1-lol",
-    "titulo": "1v1.LOL",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=1v1.LOL",
-    "url": "https://play-1v1-lol.github.io/",
-    "categoria": "FPS"
+    "id": "bad-time-simulator",
+    "titulo": "Sans Fight (Undertale)",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Sans+Fight",
+    "url": "https://jcw87.github.io/c2-sans-fight/",
+    "categoria": "Difícil"
   },
   {
-    "id": "moto-x3m",
-    "titulo": "Moto X3M",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Moto+X3M",
-    "url": "https://moto-x3m.github.io/",
-    "categoria": "Corridas"
+    "id": "a-dark-room",
+    "titulo": "A Dark Room",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=A+Dark+Room",
+    "url": "https://doublespeakgames.github.io/adarkroom/",
+    "categoria": "RPG"
   },
   {
-    "id": "retro-bowl",
-    "titulo": "Retro Bowl",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Retro+Bowl",
-    "url": "https://retrobowl-unblocked.github.io/",
-    "categoria": "Desporto"
+    "id": "shapez",
+    "titulo": "Shapez.io",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Shapez",
+    "url": "https://shapez.io/",
+    "categoria": "Estratégia"
   },
   {
-    "id": "slope",
-    "titulo": "Slope",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Slope",
-    "url": "https://cgolden15.github.io/Slope-Game/",
-    "categoria": "Arcade"
+    "id": "sandspiel",
+    "titulo": "Sandspiel",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Sandspiel",
+    "url": "https://sandspiel.club/",
+    "categoria": "Criativo"
   },
   {
-    "id": "cluster-rush",
-    "titulo": "Cluster Rush",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Cluster+Rush",
-    "url": "https://webglmath.github.io/cluster-rush/",
-    "categoria": "Ação"
-  },
-  {
-    "id": "basket-random",
-    "titulo": "Basket Random",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Basket+Random",
-    "url": "https://basketrandompro.github.io/",
-    "categoria": "Desporto"
-  },
-  {
-    "id": "bloxd",
-    "titulo": "Bloxd.io (Minecraft)",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Minecraft+Bloxd",
-    "url": "https://bloxd.io/",
-    "categoria": "Survival"
-  },
-  {
-    "id": "2048",
-    "titulo": "2048 Classic",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=2048",
-    "url": "https://play2048.co/",
-    "categoria": "Puzzle"
+    "id": "friday-night-funkin",
+    "titulo": "Friday Night Funkin'",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=FNF",
+    "url": "https://w8.snokido.com/games/html5/friday-night-funkin/index.html",
+    "categoria": "Música"
   },
   {
     "id": "cookie-clicker",
     "titulo": "Cookie Clicker",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Cookie+Clicker",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Cookie+Clicker",
     "url": "https://orteil.dashnet.org/cookieclicker/",
     "categoria": "Casual"
   },
   {
+    "id": "tanuki-sunset",
+    "titulo": "Tanuki Sunset",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Tanuki+Sunset",
+    "url": "https://rewind-games.github.io/Tanuki-Sunset-Web-Build/",
+    "categoria": "Arcade"
+  },
+  {
+    "id": "2048",
+    "titulo": "2048",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=2048",
+    "url": "https://play2048.co/",
+    "categoria": "Puzzle"
+  },
+  {
     "id": "hextris",
     "titulo": "Hextris",
-    "imagem": "https://placehold.co/600x400/1a1a1a/e60000?text=Hextris",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=Hextris",
     "url": "https://hextris.io/",
     "categoria": "Puzzle"
+  },
+  {
+    "id": "we-become-what-we-behold",
+    "titulo": "We Become What We Behold",
+    "imagem": "https://placehold.co/600x400/2c3e50/ffffff?text=WBWWB",
+    "url": "https://ncase.itch.io/wbwwb",
+    "categoria": "Arte"
   }
 ]
