@@ -9,22 +9,33 @@
 
   { 
     "id": "1v1lol",
-   "titulo": "1v1lol", 
-   "url": "/games/cl1v1lol.html",
+    "titulo": "1v1lol", 
+     "url": "/games/cl1v1lol.html",
     "categoria": "Tiro" , 
     "imagem":"/capas/1v1lol.jpg" 
   },
 
   { 
-    "id": "run-3", 
-    "titulo": "Run 3",
-    "url": "/games/run-3.html", 
-    "categoria": "Plataforma" 
+    "id": "8ballclassic", 
+    "titulo": "8-ball-classic",
+    "url": "/games/cl8ballclassic.html", 
+    "categoria": "Ação" ,
+    "imagem":"/capas/8ballpoolclassic.jpg"
   },
 
-  { "id": "fireboy-watergirl-1", "titulo": "Fireboy & Watergirl 1", "url": "/games/clfireboyandwatergirl.html", "categoria": "Aventura" },
+  { "id": "fireboy-watergirl-1", 
+  "titulo": "Fireboy & Watergirl 1", 
+  "url": "/games/clfireboyandwatergirl.html",
+   "categoria": "Aventura",
+   "image":"fireboy.jpg" 
+  },
 
-  { "id": "tunnel-rush", "titulo": "Tunnel Rush", "url": "/games/tunnel-rush.html", "categoria": "Ação" },
+  { 
+  "id": "tunnel-rush", 
+  "titulo": "Tunnel Rush",
+   "url": "/games/tunnel-rush.html", 
+   "categoria": "Ação" 
+  },
 
   { "id": "subway-surfers", "titulo": "Subway Surfers", "url": "/games/subway-surfers.html", "categoria": "Arcade" },
 
