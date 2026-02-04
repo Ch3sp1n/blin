@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "titulo": "Paper Minecraft",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Minecraft",
+    "url": "https://scratch.mit.edu/projects/10128407/embed",
+    "categoria": "Survival"
+  },
+  {
+    "id": "2",
+    "titulo": "Appel (Mario Style)",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Appel",
+    "url": "https://scratch.mit.edu/projects/60917032/embed",
+    "categoria": "Aventura"
+  },
+  {
+    "id": "3",
+    "titulo": "Slope",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Slope",
+    "url": "https://cgolden15.github.io/Slope-Game/",
+    "categoria": "Arcade"
+  },
+  {
+    "id": "4",
+    "titulo": "1v1.LOL",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=1v1.LOL",
+    "url": "https://play-1v1-lol.github.io/",
+    "categoria": "Ação"
+  },
+  {
+    "id": "5",
+    "titulo": "Basket Random",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=Basket+Random",
+    "url": "https://basketrandompro.github.io/",
+    "categoria": "Desporto"
+  },
+  {
+    "id": "6",
+    "titulo": "2048",
+    "thumb": "https://placehold.co/600x400/050505/00ff00?text=2048",
+    "url": "https://play2048.co/",
+    "categoria": "Puzzle"
+  }
+]

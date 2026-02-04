@@ -1,0 +1,191 @@
+---
+// src/components/PerfilJogador.astro
+---
+
+<div id="gamer-profile" class="profile-container">
+  <div id="login-form" class="hidden">
+    <span class="label">CRIAR GAMER ID</span>
+    <div class="input-group">
+      <input type="text" id="username-input" placeholder="O teu Nick..." maxlength="12">
+      <button id="login-btn">ENTRAR</button>
+    </div>
+  </div>
+
+  <div id="welcome-msg" class="hidden">
+    <div class="avatar">👤</div>
+    <div class="info">
+      <span class="status">ONLINE</span>
+      <h3 id="display-name">Jogador</h3>
+    </div>
+    <button id="logout-btn">SAIR</button>
+  </div>
+</div>
+
+<script>
+  // Lógica do Login (Corre no navegador)
+  const profileContainer = document.getElementById('gamer-profile');
+  const loginForm = document.getElementById('login-form');
+  const welcomeMsg = document.getElementById('welcome-msg');
+  const input = document.getElementById('username-input');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const displayName = document.getElementById('display-name');
+
+  // 1. Verificar se já existe nome guardado
+  function checkLogin() {
+    const savedName = localStorage.getItem('gamerName');
+    
+    if (savedName) {
+      // Tem login feito
+      loginForm.classList.add('hidden');
+      welcomeMsg.classList.remove('hidden');
+      displayName.innerText = savedName;
+      profileContainer.classList.add('logged-in');
+    } else {
+      // Não tem login
+      loginForm.classList.remove('hidden');
+      welcomeMsg.classList.add('hidden');
+      profileContainer.classList.remove('logged-in');
+    }
+  }
+
+  // 2. Ação de Entrar
+  loginBtn.addEventListener('click', () => {
+    const name = input.value.trim();
+    if (name) {
+      localStorage.setItem('gamerName', name); // Guarda na memória
+      checkLogin(); // Atualiza o ecrã
+    } else {
+      alert("Escreve um nome fixe!");
+    }
+  });
+
+  // 3. Ação de Sair
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('gamerName'); // Apaga da memória
+    input.value = ''; // Limpa o input
+    checkLogin(); // Atualiza o ecrã
+  });
+
+  // Arrancar a verificação ao iniciar
+  checkLogin();
+</script>
+
+<style>
+  .profile-container {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #333;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  .profile-container.logged-in {
+    border-color: #00ff88; /* Verde quando logado */
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+  }
+
+  /* Estilo do Input */
+  .input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  input {
+    background: #111;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: 100%;
+    font-family: monospace;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #ff0055;
+  }
+
+  /* Botões */
+  button {
+    background: #ff0055;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: monospace;
+    transition: transform 0.1s;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  #logout-btn {
+    background: #333;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    margin-left: auto;
+  }
+
+  #logout-btn:hover {
+    background: #555;
+  }
+
+  /* Labels e Textos */
+  .label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Área de boas-vindas */
+  #welcome-msg {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .avatar {
+    font-size: 2rem;
+    background: #222;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00ff88;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status {
+    color: #00ff88;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.2rem;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
