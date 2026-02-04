@@ -10,163 +10,265 @@ const categorias = [...new Set(listaDeJogos.map((jogo) => jogo.categoria))];
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Gamer Portal | Retro Arcade</title>
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GAMER PORTAL | Nexus Edition</title>
     
-    <div class="retro-bg"><div class="grid"></div></div>
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PQHFF59B');
+    </script>
+  </head>
+  
+  <body>
+    <div class="space-bg">
+      <div class="stars"></div>
+      <div class="retro-grid"></div>
+      <div class="vignette"></div>
+    </div>
 
     <header>
-      <div class="header-top">
-        <a href="/" class="logo-link">
-          <div class="logo-text">GAMER <span class="highlight">PORTAL</span></div>
+      <nav class="top-nav">
+        <a href="/" class="logo-container">
+          <h1 class="glitch-logo" data-text="GAMERPORTAL">GAMER<span class="pink">PORTAL</span></h1>
         </a>
-        <PerfilJogador />
-      </div>
+        <div class="user-area">
+          <PerfilJogador />
+        </div>
+      </nav>
 
-      <div class="controls-wrapper">
-        <div class="search-container">
-          <input type="text" id="searchBox" placeholder="Pesquisar na biblioteca..." />
+      <div class="hero-section">
+        <div class="search-wrapper">
+          <div class="search-glow"></div>
+          <input type="text" id="searchBox" placeholder="O que vamos jogar hoje?..." />
+          <kbd class="search-hint">CTRL + K</kbd>
         </div>
 
-        <div class="filters">
-          <button class="filter-btn active" data-cat="todos">Todos</button>
-          <button class="filter-btn fav-filter" data-cat="favoritos">❤️ Favoritos</button>
-          {categorias.map((cat) => (
-            <button class="filter-btn" data-cat={cat}>{cat}</button>
-          ))}
+        <div class="filter-bar">
+          <div class="filter-scroll">
+            <button class="filter-chip active" data-cat="todos">Explorar Tudo</button>
+            <button class="filter-chip fav" data-cat="favoritos">❤️ Os Meus Favoritos</button>
+            <div class="divider"></div>
+            {categorias.map((cat) => (
+              <button class="filter-chip" data-cat={cat}>{cat}</button>
+            ))}
+          </div>
         </div>
       </div>
     </header>
 
-    <main class="game-grid">
-      {listaDeJogos.map((jogo) => (
-        <div 
-          class="game-wrapper" 
-          data-titulo={jogo.titulo.toLowerCase()} 
-          data-categoria={jogo.categoria}
-          data-id={jogo.id}
-        >
-          <GameCard 
-            id={jogo.id}
-            titulo={jogo.titulo} 
-            thumb={jogo.imagem || "/capas/placeholder.jpg"} 
-            categoria={jogo.categoria} 
-          />
-        </div>
-      ))}
+    <main class="content">
+      <div class="game-grid" id="mainGrid">
+        {listaDeJogos.map((jogo) => (
+          <div 
+            class="game-card-wrapper" 
+            data-titulo={jogo.titulo.toLowerCase()} 
+            data-categoria={jogo.categoria}
+            data-id={jogo.id}
+          >
+            <GameCard 
+              id={jogo.id}
+              titulo={jogo.titulo} 
+              thumb={jogo.imagem || "/capas/placeholder.jpg"} 
+              categoria={jogo.categoria} 
+            />
+          </div>
+        ))}
+      </div>
+
+      <div id="empty-state" class="hidden">
+        <div class="empty-icon">🕹️</div>
+        <h2>Nenhum jogo detetado no radar...</h2>
+        <p>Tenta pesquisar por outro termo ou limpa os filtros.</p>
+      </div>
     </main>
-    
-    <p id="no-results">Nenhum jogo encontrado... 😢</p>
 
     <script is:inline>
       const searchBox = document.getElementById('searchBox');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const games = document.querySelectorAll('.game-wrapper');
-      const noResults = document.getElementById('no-results');
+      const filterBtns = document.querySelectorAll('.filter-chip');
+      const games = document.querySelectorAll('.game-card-wrapper');
+      const emptyState = document.getElementById('empty-state');
       
       let favoritos = JSON.parse(localStorage.getItem('meusJogosFavoritos')) || [];
 
-      function atualizarCoracoes() {
+      function syncFavorites() {
         document.querySelectorAll('.heart-btn').forEach(btn => {
           const id = btn.getAttribute('data-id');
-          if (favoritos.includes(id)) btn.classList.add('liked');
-          else btn.classList.remove('liked');
+          btn.classList.toggle('is-active', favoritos.includes(id));
         });
       }
 
-      function filtrar() {
-        const termo = searchBox.value.toLowerCase();
-        let visiveis = 0;
-        const catAtual = document.querySelector('.filter-btn.active').getAttribute('data-cat');
+      function applyFilters() {
+        const query = searchBox.value.toLowerCase();
+        const activeCat = document.querySelector('.filter-chip.active').getAttribute('data-cat');
+        let count = 0;
 
-        games.forEach((game) => {
-          const titulo = game.getAttribute('data-titulo');
-          const catJogo = game.getAttribute('data-categoria');
-          const idJogo = game.getAttribute('data-id');
+        games.forEach(game => {
+          const title = game.getAttribute('data-titulo');
+          const cat = game.getAttribute('data-categoria');
+          const id = game.getAttribute('data-id');
 
-          const matchTexto = titulo.includes(termo);
-          const matchCat = catAtual === 'todos' || (catAtual === 'favoritos' ? favoritos.includes(idJogo) : catJogo === catAtual);
+          const matchesSearch = title.includes(query);
+          const matchesCat = activeCat === 'todos' || 
+                             (activeCat === 'favoritos' ? favoritos.includes(id) : cat === activeCat);
 
-          if (matchTexto && matchCat) {
+          if (matchesSearch && matchesCat) {
             game.style.display = 'block';
-            visiveis++;
+            game.style.animation = 'fadeIn 0.4s ease forwards';
+            count++;
           } else {
             game.style.display = 'none';
           }
         });
 
-        noResults.style.display = visiveis > 0 ? 'none' : 'block';
+        emptyState.classList.toggle('hidden', count > 0);
       }
 
-      // Event Listeners
-      searchBox.addEventListener('input', filtrar);
+      // Listeners
+      searchBox.addEventListener('input', applyFilters);
+      
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          filtrar();
+          applyFilters();
         });
       });
 
-      // Clique nos corações (Event Delegation)
-      document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.heart-btn');
-        if (btn) {
-          const id = btn.getAttribute('data-id');
-          if (favoritos.includes(id)) favoritos = favoritos.filter(f => f !== id);
-          else favoritos.push(id);
-          localStorage.setItem('meusJogosFavoritos', JSON.stringify(favoritos));
-          atualizarCoracoes();
-          filtrar();
+      // Atalho de teclado
+      window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'k') {
+          e.preventDefault();
+          searchBox.focus();
         }
       });
 
-      atualizarCoracoes();
+      // Inicialização
+      syncFavorites();
     </script>
   </body>
 </html>
 
 <style>
-  /* DE VOLTA AO VISUAL BONITO */
-  body { background-color: #050505; color: white; margin: 0; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
-
-  .retro-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; perspective: 1000px; }
-  .grid {
-    position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
-    background-image: linear-gradient(rgba(255, 0, 85, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 85, 0.2) 1px, transparent 1px);
-    background-size: 50px 50px; transform: rotateX(60deg); animation: move 20s linear infinite;
+  /* CONFIGURAÇÃO DE CORES E VARIÁVEIS */
+  :root {
+    --neon-pink: #ff0055;
+    --neon-cyan: #00f2ff;
+    --bg-dark: #08080c;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
   }
-  @keyframes move { from { background-position: 0 0; } to { background-position: 0 50px; } }
 
-  header { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
-  .header-top { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
-
-  .logo-text { font-size: 3rem; font-weight: 900; font-style: italic; letter-spacing: -2px; text-shadow: 0 0 20px rgba(255, 0, 85, 0.5); }
-  .highlight { color: #ff0055; }
-
-  .search-container input {
-    background: rgba(20, 20, 20, 0.8); border: 2px solid #333; color: white;
-    padding: 15px 30px; border-radius: 50px; width: 400px; outline: none; transition: 0.3s;
-    backdrop-filter: blur(10px);
+  body {
+    background-color: var(--bg-dark);
+    color: white;
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
-  .search-container input:focus { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
-  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .filter-btn {
-    background: #1a1a1a; border: 1px solid #333; color: #888; padding: 8px 20px;
-    border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: 600;
+  /* BACKGROUND RECONSTRUÍDO (O TEU FAVORITO) */
+  .space-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #08080c 100%);
   }
-  .filter-btn.active { background: #ff0055; color: white; border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.4); }
 
+  .retro-grid {
+    position: absolute; width: 200%; height: 200%; bottom: -50%; left: -50%;
+    background-image: 
+      linear-gradient(var(--neon-pink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--neon-pink) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(500px) rotateX(60deg);
+    mask-image: linear-gradient(to top, black, transparent 80%);
+    opacity: 0.15;
+    animation: gridMove 15s linear infinite;
+  }
+
+  @keyframes gridMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 60px; }
+  }
+
+  /* LOGO GLITCH */
+  .glitch-logo {
+    font-size: 2rem; font-weight: 900; letter-spacing: -1px; margin: 0;
+    position: relative; text-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+  }
+  .pink { color: var(--neon-pink); }
+
+  /* CABEÇALHO STYLE */
+  .top-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 5%; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .hero-section {
+    padding: 60px 5% 20px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 40px;
+  }
+
+  /* BARRA DE PESQUISA "CYBER" */
+  .search-wrapper {
+    position: relative; width: 100%; max-width: 600px;
+  }
+  .search-glow {
+    position: absolute; inset: -2px; background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+    border-radius: 50px; filter: blur(10px); opacity: 0.3; z-index: -1;
+  }
+  #searchBox {
+    width: 100%; background: #111; border: 1px solid #333; border-radius: 50px;
+    padding: 18px 30px; color: white; font-size: 1.1rem; outline: none; transition: 0.3s;
+  }
+  #searchBox:focus { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,0,85,0.2); }
+  
+  .search-hint {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    background: #222; padding: 4px 8px; border-radius: 5px; font-size: 0.7rem; color: #666;
+  }
+
+  /* FILTROS MODERNOS */
+  .filter-bar { width: 100%; max-width: 1200px; overflow: hidden; }
+  .filter-scroll {
+    display: flex; gap: 12px; overflow-x: auto; padding: 10px 0;
+    scrollbar-width: none; justify-content: flex-start;
+  }
+  .filter-chip {
+    white-space: nowrap; background: var(--card-bg); border: 1px solid var(--glass-border);
+    color: #999; padding: 10px 24px; border-radius: 12px; cursor: pointer;
+    font-weight: 600; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .filter-chip:hover { background: rgba(255,255,255,0.08); color: white; }
+  .filter-chip.active {
+    background: var(--neon-pink); color: white; border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); transform: translateY(-2px);
+  }
+
+  /* GRID DE JOGOS */
+  .content { padding: 40px 5%; max-width: 1600px; margin: 0 auto; }
   .game-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
   }
 
-  #no-results { text-align: center; color: #666; display: none; margin-top: 50px; font-size: 1.2rem; }
+  .game-card-wrapper {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .game-card-wrapper:hover { transform: scale(1.05); }
 
-  /* Coração rosa néon */
-  :global(.liked) { color: #ff0055 !important; filter: drop-shadow(0 0 5px #ff0055); }
+  /* ESTADO VAZIO */
+  #empty-state {
+    text-align: center; padding: 100px 0; color: #444;
+  }
+  .hidden { display: none !important; }
+  .empty-icon { font-size: 4rem; margin-bottom: 20px; opacity: 0.5; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-dark); }
+  ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--neon-pink); }
 </style>
