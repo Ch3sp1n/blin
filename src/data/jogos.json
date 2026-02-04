@@ -7,9 +7,20 @@
     "imagem": "/capas/adventurecapitalist.jpg"
   },
 
-  { "id": "slope", "titulo": "Slope", "url": "/games/slope.html", "categoria": "Ação" , "imagem":"" },
+  { 
+    "id": "1v1lol",
+   "titulo": "1v1lol", 
+   "url": "/games/cl1v1lol.html",
+    "categoria": "Tiro" , 
+    "imagem":"1v1lol.jpg" 
+  },
 
-  { "id": "run-3", "titulo": "Run 3", "url": "/games/run-3.html", "categoria": "Plataforma" },
+  { 
+    "id": "run-3", 
+    "titulo": "Run 3",
+    "url": "/games/run-3.html", 
+    "categoria": "Plataforma" 
+  },
 
   { "id": "fireboy-watergirl-1", "titulo": "Fireboy & Watergirl 1", "url": "/games/clfireboyandwatergirl.html", "categoria": "Aventura" },
 
