@@ -137,12 +137,15 @@ const { jogo } = Astro.props;
     position: relative; /* Necessário para o fullscreen funcionar bem */
   }
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
+ <iframe 
+  src="https://html5.gamedistribution.com/393710775d71485680190538059048a1/?gd_sdk_referrer_url=https://blin-pied.vercel.app" 
+  width="100%" 
+  height="600" 
+  scrolling="none" 
+  frameborder="0" 
+  allow="autoplay; fullscreen; encrypted-media"
+  title="Game Title"
+></iframe>
 
   /* 5. BARRA DE CONTROLOS (EM BAIXO) */
   .controls-bar {
